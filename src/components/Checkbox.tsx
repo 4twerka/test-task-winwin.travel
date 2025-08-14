@@ -1,24 +1,49 @@
 import { useState } from "react";
+import type { ChangeEventHandler } from "react";
 
-function CheckBox() {
-    const [checked, setChecked] = useState(false);
+interface CheckBoxProps {
+    checked?: boolean;
+    defaultChecked?: boolean;
+    onChange?: ChangeEventHandler<HTMLInputElement>;
+    className?: string;
+}
+
+function CheckBox({
+    checked: controlledChecked,
+    defaultChecked = false,
+    onChange,
+    className = ""
+}: CheckBoxProps) {
+    const [internalChecked, setInternalChecked] = useState(defaultChecked);
+
+    const isControlled = controlledChecked !== undefined;
+    const isChecked = isControlled ? controlledChecked : internalChecked;
+
+    const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+        if (!isControlled) {
+            setInternalChecked(e.target.checked);
+        }
+        onChange?.(e);
+    };
 
     return (
-        <label className="inline-flex items-center cursor-pointer">
+        <label className={`inline-flex items-center cursor-pointer ${className}`}>
             <input
                 type="checkbox"
-                checked={checked}
-                onChange={() => setChecked(!checked)}
+                checked={isChecked}
+                onChange={handleChange}
                 className="hidden"
             />
             <span
                 className={`
                     w-6 h-6 flex items-center justify-center
                     border-2 rounded-sm transition-colors duration-200
-                    ${checked ? "bg-[#31393C] border-[#31393C]" : "bg-white border-gray-400 hover:border-[#31393C] hover:bg-[#F4F4F4]"}
+                    ${isChecked
+                        ? "bg-[#31393C] border-[#31393C]"
+                        : "bg-white border-gray-400 hover:border-[#31393C] hover:bg-[#F4F4F4]"}
                 `}
             >
-                {checked && (
+                {isChecked && (
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"

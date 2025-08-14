@@ -1,24 +1,26 @@
-import { useState } from "react"
-import { Button } from "@/components/Button"
-import { ConfirmationModal } from "@/components/ConfirmationModal"
+import { useState } from "react";
+import { Button } from "@/components/Button";
 import { Modal } from "@/components/Modal";
+import { useFilterStore } from "@/store/UseFilterStore";
 
 export const App = () => {
-	const [isOpen, setIsOpen] = useState<boolean>(false);
-
-	const toggleOpen = () => {
-		setIsOpen(prev => !prev);
-	}
+	const [isOpen, setIsOpen] = useState(false);
+	const filters = useFilterStore((state) => state.filters);
 
 	return (
 		<section className="w-full h-dvh flex flex-col items-center justify-center">
-			{/* eslint-disable-next-line i18next/no-literal-string */}
-			<h1 className="text-6xl text-gray-600 mb-12">
+			<h1 className="text-4xl text-gray-600 mb-6">
 				WinWinTravel frontend test task
 			</h1>
-			<Button onClick={toggleOpen} variant="primary">Open Filters</Button>
-			{/* {isOpen ? <ConfirmationModal /> : null} */}
-			{isOpen ? <Modal onClose={() => setIsOpen(false)} /> : null}
+			<Button onClick={() => setIsOpen(true)} variant="primary">
+				Open Filters
+			</Button>
+
+			<pre className="mt-8 bg-gray-100 p-4 rounded-lg">
+				{JSON.stringify(filters, null, 2)}
+			</pre>
+
+			{isOpen && <Modal onClose={() => setIsOpen(false)} />}
 		</section>
-	)
-}
+	);
+};
