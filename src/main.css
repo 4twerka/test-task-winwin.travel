@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+
+@theme {
+    --color-customOrange: #FF5F00;
+    --color-customOrangeHover: #FF9E59;
+    --color-primary-100: #078691;
+
+    --font-inter: 'Inter', sans-serif;
+}
