@@ -97,7 +97,7 @@ function Modal({ onClose }: { onClose: () => void }) {
                         ))}
                     </div>
 
-                    <div className="bg-white border-t border-gray-300 p-4 flex items-center justify-center relative">
+                    <div className="bg-white border-t border-gray-300 p-4 flex flex-col sm:flex-row items-center justify-center relative">
                         <Button
                             variant="primary"
                             onClick={() => {
@@ -120,12 +120,13 @@ function Modal({ onClose }: { onClose: () => void }) {
 
                         <Text
                             size="sm"
-                            className="absolute right-4 text-primary-100 underline cursor-pointer whitespace-nowrap"
+                            className="mt-2 sm:mt-0 sm:absolute sm:right-4 text-primary-100 underline cursor-pointer whitespace-nowrap"
                             onClick={() => setDraftFilters([])}
                         >
                             Clear all parameters
                         </Text>
                     </div>
+
                 </div>
             </div>
 
