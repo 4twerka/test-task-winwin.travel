@@ -7,13 +7,13 @@ interface Props<T extends HTMLElement = HTMLDivElement> {
 	onClick?: MouseEventHandler<T>
 }
 
-function Text<T extends HTMLElement = HTMLDivElement>({
+const Text = <T extends HTMLElement = HTMLDivElement>({
 	component,
 	children,
 	size,
 	className,
 	onClick
-}: PropsWithChildren<Props<T>>) {
+}: PropsWithChildren<Props<T>>) => {
 	const Component = component || 'div'
 
 	const sizeClasses =

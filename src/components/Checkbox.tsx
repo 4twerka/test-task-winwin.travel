@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import type { ChangeEventHandler } from 'react'
+import { type ChangeEventHandler, useState } from 'react'
 
 interface CheckBoxProps {
 	checked?: boolean
@@ -8,12 +7,12 @@ interface CheckBoxProps {
 	className?: string
 }
 
-function CheckBox({
+const CheckBox = ({
 	checked: controlledChecked,
 	defaultChecked = false,
 	onChange,
 	className = ''
-}: CheckBoxProps) {
+}: CheckBoxProps) => {
 	const [internalChecked, setInternalChecked] = useState(defaultChecked)
 
 	const isControlled = controlledChecked !== undefined

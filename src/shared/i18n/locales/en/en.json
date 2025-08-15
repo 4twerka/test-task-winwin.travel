@@ -1,0 +1,22 @@
+{
+	"translation": {
+		"modals": {
+			"confirmation": {
+				"title": "Do you want to apply new filter",
+				"cancel": "Use old filter",
+				"apply": "Apply new filter"
+			},
+			"filters": {
+				"title": "Fitler",
+				"apply": "Apply",
+				"clear": "Clear all parameters"
+			}
+		},
+		"home": {
+			"title": "WinWinTravel frontend test task",
+			"actions": {
+				"open": "Open Filters"
+			}
+		}
+	}
+}

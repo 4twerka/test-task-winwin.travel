@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { IoClose } from 'react-icons/io5'
 
-import { useFilterStore } from '@/store/UseFilterStore'
+import { useFilterStore } from '@store/UseFilterStore'
 
 import { Button } from './Button'
 import { CheckBox } from './Checkbox'
@@ -17,13 +18,13 @@ interface FilterItem {
 	options: FilterOption[]
 }
 
-function Modal({ onClose }: { onClose: () => void }) {
+const Modal = ({ onClose }: { onClose: () => void }) => {
 	const [filterItems, setFilterItems] = useState<FilterItem[]>([])
 	const [draftFilters, setDraftFilters] = useState<
 		{ id: number; name: string }[]
 	>([])
 	const [showConfirm, setShowConfirm] = useState(false)
-
+	const { t } = useTranslation()
 	const filters = useFilterStore(state => state.filters)
 	const addFilter = useFilterStore(state => state.addFilter)
 	const clearFilters = useFilterStore(state => state.clearFilters)
@@ -43,8 +44,8 @@ function Modal({ onClose }: { onClose: () => void }) {
 
 	const toggleOption = (name: string) => {
 		setDraftFilters(prev => {
-			if (prev.some(f => f.name === name)) {
-				return prev.filter(f => f.name !== name)
+			if (prev.some(filter => filter.name === name)) {
+				return prev.filter(filter => filter.name !== name)
 			}
 			return [...prev, { id: Date.now(), name }]
 		})
@@ -52,7 +53,7 @@ function Modal({ onClose }: { onClose: () => void }) {
 
 	const applyDraftToStore = () => {
 		clearFilters()
-		draftFilters.forEach(f => addFilter(f.name))
+		draftFilters.forEach(filter => addFilter(filter.name))
 	}
 
 	return (
@@ -64,7 +65,7 @@ function Modal({ onClose }: { onClose: () => void }) {
 							size="lg"
 							className="font-semibold text-center block"
 						>
-							Filter
+							{t('modals.filters.title')}
 						</Text>
 						<IoClose
 							size={30}
@@ -89,7 +90,7 @@ function Modal({ onClose }: { onClose: () => void }) {
 								<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-5 gap-x-7 my-5">
 									{item.options.map((option, idx) => {
 										const isChecked = draftFilters.some(
-											f => f.name === option.name
+											filter => filter.name === option.name
 										)
 
 										return (
@@ -121,7 +122,7 @@ function Modal({ onClose }: { onClose: () => void }) {
 								const filtersChanged =
 									filters.length !== draftFilters.length ||
 									!draftFilters.every(df =>
-										filters.some(f => f.name === df.name)
+										filters.some(filter => filter.name === df.name)
 									)
 
 								if (!filtersChanged) {
@@ -132,7 +133,7 @@ function Modal({ onClose }: { onClose: () => void }) {
 								setShowConfirm(true)
 							}}
 						>
-							Apply
+							{t('modals.filters.apply')}
 						</Button>
 
 						<Text
@@ -140,7 +141,7 @@ function Modal({ onClose }: { onClose: () => void }) {
 							className="mt-2 sm:mt-0 sm:absolute sm:right-4 text-primary-100 underline cursor-pointer whitespace-nowrap"
 							onClick={() => setDraftFilters([])}
 						>
-							Clear all parameters
+							{t('modals.filters.clear')}
 						</Text>
 					</div>
 				</div>

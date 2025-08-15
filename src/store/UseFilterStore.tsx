@@ -15,7 +15,7 @@ export const useFilterStore = create<FilterState>(set => ({
 		})),
 	removeFilter: name =>
 		set(state => ({
-			filters: state.filters.filter(f => f.name !== name)
+			filters: state.filters.filter(ftr => ftr.name !== name)
 		})),
 	clearFilters: () => set({ filters: [] })
 }))

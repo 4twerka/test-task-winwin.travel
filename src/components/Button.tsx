@@ -5,7 +5,7 @@ interface Props {
 	variant: 'primary' | 'secondary'
 }
 
-function Button({ children, onClick, className, variant }: Props) {
+const Button = ({ children, onClick, className, variant }: Props) => {
 	const primaryClasses =
 		'bg-customOrange text-white border-none hover:bg-customOrangeHover transition-colors duration-200'
 	const secondaryClasses =

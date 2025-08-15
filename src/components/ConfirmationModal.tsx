@@ -1,9 +1,12 @@
+import { useTranslation } from 'react-i18next'
 import { IoClose } from 'react-icons/io5'
+
+import i18next from 'i18next'
 
 import { Button } from './Button'
 import { Text } from './Text'
 
-function ConfirmationModal({
+const ConfirmationModal = ({
 	onClose,
 	onCancel,
 	onConfirm
@@ -11,7 +14,9 @@ function ConfirmationModal({
 	onClose: () => void
 	onCancel: () => void
 	onConfirm: () => void
-}) {
+}) => {
+	const { t } = useTranslation()
+	console.log(i18next)
 	return (
 		<div className="fixed z-60 inset-0 flex items-center justify-center backdrop-blur-md">
 			<div className="bg-white w-[90%] shadow-[0_0_10px_rgba(0,0,0,0.15)] rounded-2xl px-[2rem] py-[1.5rem] flex flex-col items-center gap-[7rem] relative mx-[1rem]">
@@ -26,7 +31,7 @@ function ConfirmationModal({
 					size="lg"
 					className="text-center"
 				>
-					Do you want to apply new filter
+					{t('modals.confirmation.title')}
 				</Text>
 
 				<div className="flex gap-[2rem]">
@@ -34,13 +39,13 @@ function ConfirmationModal({
 						variant="secondary"
 						onClick={onCancel}
 					>
-						Use old filter
+						{t('modals.confirmation.cancel')}
 					</Button>
 					<Button
 						variant="primary"
 						onClick={onConfirm}
 					>
-						Apply new filter
+						{t('modals.confirmation.apply')}
 					</Button>
 				</div>
 			</div>

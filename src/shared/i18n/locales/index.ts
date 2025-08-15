@@ -1,4 +1,4 @@
-import { en } from './en'
+import en from './en/en.json'
 
 export const resources = {
 	en: en
